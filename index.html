@@ -1746,6 +1746,9 @@
         }
     </script>
 
+    <!-- ===== AUTHENTICATION SYSTEM ===== -->
+    <script src="auth.js"></script>
+    
     <!-- ===== NEW PRODUCTION SYSTEMS ===== -->
     <script src="audio-system.js"></script>
     <script src="api-client.js"></script>
@@ -1758,6 +1761,12 @@
         
         async function initializeProductionSystems() {
             try {
+                // Welcome user
+                const user = blackRoadAuth.getCurrentUser();
+                if (user) {
+                    console.log(`👋 Welcome to the Metaverse, ${user.username}!`);
+                }
+                
                 console.log('🚀 Initializing production systems...');
                 
                 // 1. Audio System
