@@ -1745,5 +1745,91 @@
             }
         }
     </script>
+
+    <!-- ===== ULTIMATE PRODUCTION SYSTEMS ===== -->
+    <script src="audio-system.js"></script>
+    <script src="api-client.js"></script>
+    <script src="performance-optimizer.js"></script>
+    
+    <script>
+        // Ultimate metaverse system integration
+        let audioSystem, apiClient, performanceOptimizer;
+        
+        async function initUltimateSystems() {
+            try {
+                console.log('🔥 Initializing ULTIMATE systems...');
+                
+                // Enhanced audio system
+                if (typeof AudioSystem !== 'undefined') {
+                    audioSystem = new AudioSystem();
+                    await audioSystem.init();
+                    
+                    const enableAudio = () => {
+                        const biome = state.currentBiome || 'forest';
+                        audioSystem.startMusic(biome.toLowerCase());
+                        console.log('🎵 Ultimate audio initialized');
+                        document.removeEventListener('click', enableAudio);
+                    };
+                    document.addEventListener('click', enableAudio, { once: true });
+                    document.addEventListener('keydown', enableAudio, { once: true });
+                }
+                
+                // Ultimate performance
+                if (typeof PerformanceOptimizer !== 'undefined' && state.renderer) {
+                    performanceOptimizer = new PerformanceOptimizer(
+                        state.renderer, 
+                        state.scene, 
+                        state.camera
+                    );
+                    
+                    // Integrate with animation loop
+                    setInterval(() => {
+                        performanceOptimizer?.update();
+                    }, 100);
+                    
+                    console.log('⚡ Ultimate performance initialized');
+                }
+                
+                // Ultimate API
+                if (typeof APIClient !== 'undefined') {
+                    apiClient = new APIClient('wss://api.blackroad.io/ws');
+                    
+                    apiClient.on('connected', () => {
+                        console.log('🔌 Ultimate API connected');
+                    });
+                    
+                    apiClient.on('agent_response', (data) => {
+                        console.log(`🤖 ${data.agent}:`, data.message);
+                    });
+                }
+                
+                // Keyboard controls
+                document.addEventListener('keydown', (e) => {
+                    // M: Toggle music
+                    if (e.key === 'm' || e.key === 'M') {
+                        if (audioSystem) {
+                            audioSystem.toggleMusic();
+                            console.log(audioSystem.musicPlaying ? '🎵 ON' : '🔇 OFF');
+                        }
+                    }
+                    
+                    // P: Performance stats
+                    if (e.key === 'p' || e.key === 'P') {
+                        if (performanceOptimizer) {
+                            console.log('⚡ Performance:', performanceOptimizer.stats);
+                        }
+                    }
+                });
+                
+                console.log('✅ ULTIMATE SYSTEMS ONLINE!');
+                
+            } catch (error) {
+                console.warn('⚠️ Ultimate system warning:', error);
+            }
+        }
+        
+        // Initialize after everything loads
+        setTimeout(initUltimateSystems, 2000);
+    </script>
 </body>
 </html>

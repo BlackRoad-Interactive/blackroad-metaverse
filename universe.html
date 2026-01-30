@@ -1028,5 +1028,92 @@
         // ===== START LOADING =====
         loadSystems();
     </script>
+
+    <!-- ===== NEW PRODUCTION SYSTEMS ===== -->
+    <script src="audio-system.js"></script>
+    <script src="api-client.js"></script>
+    <script src="performance-optimizer.js"></script>
+    
+    <!-- ===== INTEGRATION SYSTEM ===== -->
+    <script>
+        // Initialize all new systems after DOM load
+        let audioSystem, apiClient, performanceOptimizer;
+        
+        async function initializeNewSystems() {
+            try {
+                console.log('🚀 Initializing production systems...');
+                
+                // 1. Audio System
+                if (typeof AudioSystem !== 'undefined') {
+                    audioSystem = new AudioSystem();
+                    await audioSystem.init();
+                    console.log('🎵 Audio system initialized');
+                    
+                    // Auto-start music on first user interaction
+                    const startAudio = () => {
+                        audioSystem.startMusic(currentBiome.toLowerCase());
+                        document.removeEventListener('click', startAudio);
+                        document.removeEventListener('keydown', startAudio);
+                        showNotification('🎵 Music started!');
+                    };
+                    document.addEventListener('click', startAudio);
+                    document.addEventListener('keydown', startAudio);
+                }
+                
+                // 2. Performance Optimizer
+                if (typeof PerformanceOptimizer !== 'undefined') {
+                    performanceOptimizer = new PerformanceOptimizer(renderer, scene, camera);
+                    console.log('⚡ Performance optimizer initialized');
+                    
+                    // Add to render loop
+                    const originalAnimate = window.animate;
+                    if (originalAnimate) {
+                        window.animate = function() {
+                            performanceOptimizer.update();
+                            originalAnimate();
+                        };
+                    }
+                }
+                
+                // 3. API Client (optional - needs backend)
+                if (typeof APIClient !== 'undefined') {
+                    apiClient = new APIClient('wss://api.blackroad.io/ws');
+                    
+                    // Connect when user is logged in
+                    apiClient.on('connected', () => {
+                        console.log('🔌 Connected to BlackRoad API');
+                        showNotification('🔌 Connected to backend!');
+                    });
+                    
+                    apiClient.on('agent_response', (data) => {
+                        showNotification(`🤖 ${data.agent}: ${data.message}`);
+                    });
+                    
+                    console.log('🔌 API client initialized');
+                }
+                
+                console.log('✅ All production systems ready!');
+                showNotification('✅ All systems online!');
+                
+            } catch (error) {
+                console.warn('⚠️ System initialization warning:', error);
+            }
+        }
+        
+        // Initialize after page load
+        window.addEventListener('load', () => {
+            setTimeout(initializeNewSystems, 1000);
+        });
+        
+        // Add music toggle to M key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'm' || e.key === 'M') {
+                if (audioSystem) {
+                    audioSystem.toggleMusic();
+                    showNotification(audioSystem.musicPlaying ? '🎵 Music ON' : '🔇 Music OFF');
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -665,5 +665,55 @@
 
         animate();
     </script>
+
+    <!-- ===== PRODUCTION SYSTEMS ===== -->
+    <script src="audio-system.js"></script>
+    <script src="api-client.js"></script>
+    <script src="performance-optimizer.js"></script>
+    
+    <script>
+        // Pangea-specific system integration
+        let audioSystem, apiClient, performanceOptimizer;
+        
+        async function initPangeaSystems() {
+            try {
+                // Audio with prehistoric theme
+                if (typeof AudioSystem !== 'undefined') {
+                    audioSystem = new AudioSystem();
+                    await audioSystem.init();
+                    
+                    const startAudio = () => {
+                        audioSystem.startMusic('forest'); // Prehistoric forest vibes
+                        document.removeEventListener('click', startAudio);
+                    };
+                    document.addEventListener('click', startAudio, { once: true });
+                }
+                
+                // Performance optimization
+                if (typeof PerformanceOptimizer !== 'undefined') {
+                    performanceOptimizer = new PerformanceOptimizer(renderer, scene, camera);
+                    setInterval(() => performanceOptimizer?.update(), 100);
+                }
+                
+                // API (optional)
+                if (typeof APIClient !== 'undefined') {
+                    apiClient = new APIClient('wss://api.blackroad.io/ws');
+                }
+                
+                // M to toggle music
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'm' && audioSystem) {
+                        audioSystem.toggleMusic();
+                    }
+                });
+                
+                console.log('🦖 Pangea systems online!');
+            } catch (error) {
+                console.warn('⚠️ Pangea system warning:', error);
+            }
+        }
+        
+        setTimeout(initPangeaSystems, 2000);
+    </script>
 </body>
 </html>
