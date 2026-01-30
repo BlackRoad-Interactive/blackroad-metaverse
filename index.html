@@ -29,16 +29,64 @@
         }
 
         :root {
-            --bg-dark: #0a0a0a;
-            --bg-darker: #050505;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent-purple: #9B59B6;
-            --accent-blue: #4A90E2;
-            --accent-red: #E74C3C;
-            --accent-green: #27AE60;
+            /* ===== OFFICIAL BLACKROAD COLORS ===== */
+            --sunrise-orange: #FF9D00;
+            --warm-orange: #FF6B00;
+            --hot-pink: #FF0066;
+            --electric-magenta: #FF006B;
+            --deep-magenta: #D600AA;
+            --vivid-purple: #7700FF;
+            --cyber-blue: #0066FF;
+            
+            /* ===== NEUTRALS ===== */
+            --pure-black: #000000;
+            --deep-black: #0A0A0A;
+            --charcoal: #1A1A1A;
+            --pure-white: #FFFFFF;
+            --gray-300: #A0A0A0;
+            
+            /* ===== SEMANTIC COLORS ===== */
+            --success: #27AE60;
+            --error: #E74C3C;
+            --alice-blue: #0066FF;
+            --aria-pink: #FF0066;
+            --lucidia-purple: #7700FF;
+            
+            /* ===== OFFICIAL GRADIENTS ===== */
+            --gradient-br: linear-gradient(180deg, #FF9D00 0%, #FF6B00 25%, #FF0066 75%, #FF006B 100%);
+            --gradient-os: linear-gradient(180deg, #FF006B 0%, #D600AA 25%, #7700FF 75%, #0066FF 100%);
+            --gradient-full: linear-gradient(180deg, #FF9D00 0%, #FF6B00 14%, #FF0066 28%, #FF006B 42%, #D600AA 57%, #7700FF 71%, #0066FF 100%);
+            
+            /* ===== GOLDEN RATIO SPACING (φ = 1.618) ===== */
+            --space-xs: 8px;
+            --space-sm: 13px;
+            --space-md: 21px;
+            --space-lg: 34px;
+            --space-xl: 55px;
+            --space-2xl: 89px;
+            
+            /* ===== BORDER RADIUS ===== */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 34px;
+            
+            /* ===== GLASS MORPHISM ===== */
             --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-bg-strong: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-strong: rgba(255, 255, 255, 0.15);
+            
+            /* ===== LEGACY COMPAT ===== */
+            --bg-dark: var(--deep-black);
+            --bg-darker: var(--pure-black);
+            --text-primary: var(--pure-white);
+            --text-secondary: var(--gray-300);
+            --accent-purple: var(--vivid-purple);
+            --accent-blue: var(--cyber-blue);
+            --accent-red: var(--error);
+            --accent-green: var(--success);
         }
 
         body {
@@ -99,8 +147,8 @@
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 50px;
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
             width: 90%;
             max-width: 500px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -109,8 +157,9 @@
         .login-container h1 {
             font-size: 42px;
             font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #9B59B6, #4A90E2, #E74C3C);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: var(--space-sm);
+            background: var(--gradient-full);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -118,17 +167,17 @@
 
         .login-container p {
             color: var(--text-secondary);
-            margin-bottom: 30px;
+            margin-bottom: var(--space-lg);
             font-size: 16px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: var(--space-md);
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: var(--space-xs);
             font-size: 14px;
             font-weight: 500;
             color: var(--text-secondary);
@@ -136,39 +185,40 @@
 
         .form-group input {
             width: 100%;
-            padding: 15px;
+            padding: var(--space-sm) var(--space-md);
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             color: var(--text-primary);
             font-size: 16px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             transition: all 0.3s ease;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+            border-color: var(--hot-pink);
+            box-shadow: 0 0 0 3px rgba(255, 0, 102, 0.2);
         }
 
         .btn-primary {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #9B59B6, #4A90E2);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--gradient-br);
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             color: white;
             font-size: 16px;
             font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-top: var(--space-sm);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 0, 102, 0.4);
         }
 
         .signup-link {
@@ -1408,9 +1458,10 @@
             state.scene.add(directionalLight);
 
             // Create AI Agents in 3D
-            createAgent('Alice', new THREE.Vector3(-5, 0, 0), 0x4A90E2);
-            createAgent('Aria', new THREE.Vector3(0, 0, -5), 0xE74C3C);
-            createAgent('Lucidia', new THREE.Vector3(5, 0, 0), 0x9B59B6);
+            // Create AI agents with official brand colors
+            createAgent('Alice', new THREE.Vector3(-5, 0, 0), 0x0066FF);  // Cyber Blue
+            createAgent('Aria', new THREE.Vector3(0, 0, -5), 0xFF0066);   // Hot Pink
+            createAgent('Lucidia', new THREE.Vector3(5, 0, 0), 0x7700FF); // Vivid Purple
 
             // Controls
             state.controls = new PointerLockControls(state.camera, canvas);
